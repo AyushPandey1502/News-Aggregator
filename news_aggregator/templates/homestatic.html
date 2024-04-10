@@ -1,0 +1,76 @@
+<!-- loading static -->
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>News Aggregator</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Permanent+Marker&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Connecting Bootstrap CSS file -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <link rel="stylesheet" href="{% static 'css/mystyle.css' %}">
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="jumbotron" id="shadow">
+      <center>
+        <h2 class="display-4 text-white heading">ONION NEWS AGGREGATOR</h2>
+        <div class="dropdown">
+          <a href="/" class="btn btn-success" id="shadow">Home</a>
+          <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false" id="shadow">
+            Category
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="shadow">
+            <a class="dropdown-item" href="{% url 'scrape' name='latest' %}">Latest</a>
+            <!-- url - 127.0.0.1:8000/scrape/latest -->
+            <a class="dropdown-item" href="{% url 'scrape' name='entertainment' %}">Entertainment</a>
+            <a class="dropdown-item" href="{% url 'scrape' name='sports' %}">Sports</a>
+            <a class="dropdown-item" href="{% url 'scrape' name='politics' %}">Politics</a>
+            <a class="dropdown-item" href="{% url 'scrape' name='opinion' %}">Opinion</a>
+            <a class="dropdown-item" href="{% url 'scrape' name='breaking-news' %}">Breaking News</a>
+          </div>
+        </div>
+        <button class="btn btn-warning btn-lg btn-block m-4 p-2" id="shadow" onclick="themeChange()">
+          Change Theme
+        </button>
+      </center>
+    </div>
+
+    <div id="shadow" class="row mt-2 p-2">
+      <!-- Display a image -->
+      <!-- <img src="{% static 'images/welcome.jpg' %}"> -->
+      <img src="https://oakleafcare.com/wp-content/uploads/2020/06/iStock-1172141868.jpg" />
+    </div>
+  </div>
+
+  <script>
+    // add a temporary textarea element, set url to it, select from there
+    function copyToClipboard(text) {
+
+      var input = document.createElement("textarea");//create text area
+      input.value = text;//url set as value to textarea
+      document.body.appendChild(input);//add text area to body
+      input.select();//select textarea content
+      document.execCommand("copy");
+      document.body.removeChild(input);
+      alert("Copied to clipboard: " + text);
+    }
+
+    function themeChange() {
+      var element = document.body;
+      element.classList.toggle("dark-mode");
+    }
+  </script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>

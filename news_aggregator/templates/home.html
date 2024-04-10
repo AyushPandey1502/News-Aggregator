@@ -1,0 +1,228 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>News Aggregator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Connecting fontawesome CSS file -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Connecting Bootstrap CSS file -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <link rel="stylesheet" href="{% static 'css/mystyle.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/utility.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style-switcher.css' %}">
+
+  <link rel="stylesheet" href="../assets/css/color/color-1.css" class="alternate-style" title="color-1" disabled>
+  <link rel="stylesheet" href="../assets/css/color/color-2.css" class="alternate-style" title="color-2" disabled>
+  <link rel="stylesheet" href="../assets/css/color/color-3.css" class="alternate-style" title="color-3" disabled>
+  <link rel="stylesheet" href="../assets/css/color/color-4.css" class="alternate-style" title="color-4" disabled>
+  <link rel="stylesheet" href="../assets/css/color/color-5.css" class="alternate-style" title="color-5" disabled>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd" crossorigin="anonymous">
+</head>
+
+<body>
+  <header>
+    <nav class="navigation">
+      <img src="{% static 'images/onionNewsLogo.png' %}" alt="" class="logo">
+      <a href="{% url 'home' %}" class="active"><i class="fa fa-home"></i>Home</a>
+      <a href="{% url 'about' %}"><i class="fa fa-user"></i>About</a>
+      <a href="{% url 'service' %}" class=""><i class="fa fa-list"></i>Services</a>
+      <a href="{% url 'contact' %}"><i class="fa fa-comments"></i>Contact</a>
+      <input type="text" placeholder="Enter the Category..." class="inputSearch" id="searchInput">
+      <button type="button" id="searchBtn"><i class="bi bi-search"></i></button>
+      <button class="bttn">Login</button>
+    </nav>
+
+  </header>
+  <div class="nav-toggler">
+    <span></span>
+  </div>
+  <div class="container">
+    <div class="jumbotron">
+      <center>
+        <h2 class="display-5 text-white heading">ONION NEWS AGGREGATOR</h2>
+        <div class="dropdown">
+          <a href="/" class="btn btn-success fancy-btn">Home</a>
+          <button class="btn btn-success dropdown-toggle fancy-btn" type="button" id="dropdownMenuButton"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Category
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="{% url 'scrape' name='latest' %}">Latest</a>
+            <!-- url - 127.0.0.1:8000/scrape/latest -->
+            <a class="dropdown-item" href="{% url 'scrape' name='entertainment' %}">Entertainment</a>
+            <a class="dropdown-item" href="{% url 'scrape' name='sports' %}">Sports</a>
+            <a class="dropdown-item" href="{% url 'scrape' name='politics' %}">Politics</a>
+            <a class="dropdown-item" href="{% url 'scrape' name='opinion' %}">Opinion</a>
+            <a class="dropdown-item" href="{% url 'scrape' name='breaking-news' %}">Breaking News</a>
+          </div>
+        </div>
+        <!-- <button class="btn btn-warning btn-lg btn-block m-4 p-2" onclick="themeChange()">
+          Change Theme
+        </button> -->
+      </center>
+    </div>
+
+    <div class="row mt-2 p-2">
+      <!-- 
+          Django Template Language
+          DTL help us to create conditional statements or logical loops inside template 
+        -->
+      {% for record in object_list %}
+      <!-- the following code will be repeated based on how many values are available in object_list -->
+      <div class="col-12 col-md-4 col-lg-3">
+        <div class="card mb-4">
+          <img class="card-img-top" src="{{ record.image }}" />
+          <div class="card-body">
+            <h5 class="card-title">
+              <a href="{{ record.url }}">{{ record.title|truncatechars:50 }}</a>
+            </h5>
+          </div>
+          <div class="card-footer">
+            <div class="d-flex justify-content-between flex-wrap">
+              <div class="mb-2">
+                <!-- Copy Button -->
+                <button class="btn btn-secondary btn-sm btn-block" onclick="copyToClipboard('{{ record.url }}')">
+                  Copy
+                </button>
+              </div>
+
+              <div class="mb-2">
+                <!-- Report Button -->
+                <button class="btn btn-danger btn-sm btn-block" onclick=" ">
+                  Report
+                </button>
+              </div>
+
+              <div class="mb-2">
+                <!-- Social Share -->
+                <a class="btn btn-success btn-sm"> Share </a>
+                <a class="btn btn-outline-success btn-sm"
+                  href="https://www.facebook.com/sharer/sharer.php?u={{ currenturl }}"><i
+                    class="fa fa-facebook"></i></a>
+
+                <a class="btn btn-outline-success btn-sm" href="https://api.whatsapp.com/send?text={{ currenturl }}"><i
+                    class="fa fa-whatsapp"></i></a>
+
+                <a class="btn btn-outline-success btn-sm" href="https://t.me/share/url?text={{ currenturl }}"><i
+                    class="fa fa-telegram"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <!-- ================= Style Switcher Start =============== -->
+    <div class="style-switcher">
+      <div class="style-switcher-toggler s-icon">
+        <i class="bi bi-gear-fill"></i>
+      </div>
+      <div class="day-night s-icon">
+        <i class="bi "></i>
+      </div>
+      <h4>Theme Colors</h4>
+      <div class="colors">
+        <span class="color-1" onclick="setActiveStyle('color-1')"></span>
+        <span class="color-2" onclick="setActiveStyle('color-2')"></span>
+        <span class="color-3" onclick="setActiveStyle('color-3')"></span>
+        <span class="color-4" onclick="setActiveStyle('color-4')"></span>
+        <span class="color-5" onclick="setActiveStyle('color-5')"></span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================= Style Switcher End =============== -->
+
+  <script>
+    // add a temporary textarea element, set url to it, select from there
+    function copyToClipboard(text) {
+
+      var input = document.createElement("textarea");//create text area
+      input.value = text;//url set as value to textarea
+      document.body.appendChild(input);//add text area to body
+      input.select();//select textarea content
+      document.execCommand("copy");
+      document.body.removeChild(input);
+      alert("Copied to clipboard: " + text);
+    }
+
+    function themeChange() {
+      var element = document.body;
+      element.classList.toggle("dark-mode");
+    }
+
+
+  </script>
+  <script>
+    const styleSwitcherToggle = document.querySelector(".style-switcher-toggler");
+    styleSwitcherToggle.addEventListener("click", () => {
+      document.querySelector(".style-switcher").classList.toggle("open");
+    })
+
+    window, addEventListener("scroll", () => {
+      if (document.querySelector(".style-switcher").classList.contains("open")) {
+        (document.querySelector(".style-switcher").classList.remove("open"))
+      }
+    })
+
+
+    const alternateStyles = document.querySelectorAll(".alternate-style");
+    function setActiveStyle(color) {
+      alternateStyles.forEach((style) => {
+        if (color === style.getAttribute("title")) {
+          style.removeAttribute("disabled");
+        }
+        else {
+          style.setAttribute("disabled", "true");
+        }
+      })
+    }
+
+    const dayNight = document.querySelector(".day-night");
+    dayNight.addEventListener("click", () => {
+      dayNight.querySelector("i").classList.toggle("bi-sun-fill");
+      dayNight.querySelector("i").classList.toggle("bi-moon-fill");
+      document.body.classList.toggle("dark");
+      isDarkMode = !isDarkMode;
+      applyColors();
+    })
+    window.addEventListener("load", () => {
+      if (document.body.classList.contains("dark")) {
+        dayNight.querySelector("i").classList.add("bi-sun-fill");
+      }
+      else {
+        dayNight.querySelector("i").classList.add("bi-moon-fill");
+      }
+    }
+    )
+  </script>
+  <script>
+    function scrapeContent(topic) {
+      const url = `/scrape/${encodeURIComponent(topic)}`;
+      window.location.href = url;
+    }
+
+    document.getElementById('searchBtn').addEventListener('click', function () {
+      const topic = document.querySelector('#searchInput').value.trim();
+      if (topic) {
+        scrapeContent(topic);
+      }
+    });
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"
+    referrerpolicy="no-referrer"></script>
+  <script src="style-switcher.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>

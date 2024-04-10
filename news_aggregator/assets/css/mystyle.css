@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Permanent+Marker&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+  --bg-black-900: #f2f2fc;
+  --bg-black-100: #fdf9ff;
+  --bg-black-50: #e8dfec;
+  --text-black-900: #302e4d;
+  --text-black-700: #504e70;
+  --skin-color: #ec1839;
+}
+
+body {
+  padding: 25px;
+  background-color: var(--bg-black-100);
+  color: black;
+  font-size: 25px;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* class selector for dark mode*/
+
+.dark-mode {
+  background-color: #222222;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}
+
+.jumbotron {
+  background-color: #1854b4;
+  border-radius: 15px;
+  font-family: 'Poppins', sans-serif; 
+}
+.btn{
+  font-family: 'Poppins', sans-serif;
+}
+.dropdown-menu{
+  font-family: 'Poppins', sans-serif;
+}
+.dropdown-item{
+  font-family: 'Poppins', sans-serif;
+}
+
+#shadow{
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.3s ease-in-out;
+}
+ #shadow:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
+}
+
+.heading{
+  padding-top: 2rem;
+  font-size: 3.5rem;
+  text-transform: capitalize;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}

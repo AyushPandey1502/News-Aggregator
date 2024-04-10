@@ -1,0 +1,32 @@
+.bttn {
+    height: 40px;
+    width: 120px;
+    font-size: 1.1rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    border-radius: 30px;
+    margin: 10px 20px;
+    border: none;
+    cursor: pointer;
+    background: var(--skin-color);
+    color: #ffffff;
+}
+
+.bttn:hover {
+    background: transparent;
+    border: 2px solid var(--skin-color);
+    color: var(--skin-color);
+}
+
+.fancy-btn{
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-left: 2rem;
+    border-radius: 15px;
+}
+
+.card{
+    border-left: 3px solid var(--skin-color);
+    border-top: 3px solid var(--skin-color);
+    box-shadow: 3px 3px var(--text-black-700);
+}

@@ -1,1 +1,1 @@
-# Onion-News-Aggregator
+# News-Aggregator
